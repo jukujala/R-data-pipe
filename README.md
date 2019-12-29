@@ -1,12 +1,19 @@
 # R machine learning data transformation pipeline
 
-This repository `r-ml-data-transform` is both an approach and an R package
-to implement a machine learning data pipeline
-to transform input data before calling R functions `train` and `predict`.
+TODO:
+
+  * test data
+  * test that uses the test data
+  * make R package
+
+`r-functional-data-pipeline` is a simple machine learning pipeline for R.
+It is both a paradigm and a library to help you.
+Use `r-functional-data-pipeline` to transform input data before calling 
+R functions `train` and `predict`.
 
 ## Background
 
-I got frustrated that R did not have data pipelines similar to Python
+I got frustrated that R did not have good data pipelines similar to Python
 [sklearn.Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html),
 but luckily R function closures enable pipelines almost out of the box.
 This repository uses package
@@ -14,26 +21,13 @@ This repository uses package
 to represent and process data, but you can implement a similar approach in `dplyr`
 or with plain `data.frame`.
 
-## Overview
+## Steps to implement a pipeline
 
-`r-ml-data-transform` pipeline has following features:
-
-  * You define a function `createTransformFunction` that creates
-    a function `transformData` that transforms input `data.table` to
-    output `data.table`.
-  * `createTransformFunction` can fit `transformData` with data from
-    the train data.
-    For example, to find boundaries to discretize a continous input
-    column.
-  * Call `transformData` for any input data set: train, test,
-    or production/inference.
-  * Serialise function `transformData` to a file.
-  * `transformData` can call
-    [caret](http://topepo.github.io/caret/index.html)
-    preprocess function.
-
-This approach solves issues such as `factor has new levels` when predicting
-on test data.
+Write a function `createTransformFunction` that returns
+another function `transformData` which transforms input `data.table` to
+output `data.table`.
+The function `createTransformFunction` can depend on train data.
+R can persist the function `transformData` to a file.
 
 ## A short example
 
@@ -41,14 +35,14 @@ on test data.
     #'
     #' @param fit_dt: train data to fit transformation function
     #'
-    #' @return function to transform input data
+    #' @return transformation function
     createTransformFunction <- function(fit_dt) {
       # fit some transformation
       fitted_transformation <- createFittedTransformation(fit_dt)
       # prevent serialisation of fit_dt
       rm(fit_dt)
 
-      # define a function to transforms input data
+      # define a function to transform input data
       transformData <- function(input_dt) {
         # define the label
         input_dt[, label := as.character(y) ]
@@ -66,7 +60,7 @@ on test data.
     transformed_train_data <- transformData(train_data)
     transformed_test_data <- transformData(test_data)
 
-## Supported transformations in this R package
+## Transformations supported by this R package
 
 This R package implements some transformations:
 
@@ -87,10 +81,9 @@ This R package implements some transformations:
     over a given group.
     For example, add new column that has average sales by country.
 
-
 ## Long example of `createTransformFunction`
 
-This example illustrates use of the predefined transformations
+This example shows how to use the predefined transformations
 
     createTransformFunction <- function(fit_dt) {
       fit_dt <- copy(fit_dt)
@@ -147,3 +140,4 @@ This example illustrates use of the predefined transformations
 
   * [transformation_functions.R](transformation_functions.R)
     has transformation functions defined in this package.
+
