@@ -2,8 +2,8 @@
 
 `closure.data.pipe` is a simple machine learning data pipeline for R based on 
 functional programming.
-It is both a way to structure your code and a package with supporting 
-functions.
+It is both a way to structure your code and a supporting R package with
+few predefined data preprocessing transformation.
 Use `closure.data.pipe` to transform input data before calling 
 R functions `train` and `predict` both in development and production.
 
@@ -20,9 +20,8 @@ or with plain `data.frame`.
 ## Steps to implement a data pipeline
 
 Write a function `createTransformFunction` that returns
-another function `transformData` which transforms input `data.table` to
-output `data.table`.
-The function `createTransformFunction` can depend on train data.
+another function `transformData` which transforms input data.
+The function `createTransformFunction` can fit `transformData` with train data.
 R can then persist the function `transformData` to a file for later use.
 
 ## A short example
