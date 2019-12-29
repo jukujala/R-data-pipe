@@ -2,8 +2,13 @@
 
 `closure.data.pipe` is a simple machine learning data pipeline for R based on 
 functional programming.
-It is both a way to structure your code and a supporting R package with
-few predefined data preprocessing transformation.
+It is both 
+
+  1. A way to structure your code to correctly do data processing 
+     for machine learning in both development and production.
+  2. R package with few predefined data transformations.
+     and a supporting R package with
+
 Use `closure.data.pipe` to transform input data before calling 
 R functions `train` and `predict` both in development and production.
 
