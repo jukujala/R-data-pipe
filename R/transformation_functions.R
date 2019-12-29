@@ -6,6 +6,8 @@
 # of the output column for the transformation and the function transforms
 # a data.table to feature vector.
 
+library(data.table)
+
 getCategTransform <- function(col, fit_dt, threshold=0, default_value="other") {
   # get function that encodes away less common values in a feature
   # saves you from those errors on missing factor levels in test set
