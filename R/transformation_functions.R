@@ -52,6 +52,8 @@ getCategTransform <- function(col, fit_dt, threshold=0, default_value="other") {
 #' @export
 getDiscretizeTransform <- function(col, fit_dt, n=10) {
 
+  countUniq <- function(x) {length(unique(x))}
+
   # get discretization boundaries from fit_dt
   suppressWarnings(
   col_disc <- discretize(
@@ -67,6 +69,7 @@ getDiscretizeTransform <- function(col, fit_dt, n=10) {
   rm(col_disc)
   rm(fit_dt)
   discretizeTransform <- function(input_dt) {
+    x <- input_dt[[col]]
     y <- cut(x, breaks=breaks, labels=labels, right=FALSE)
     # add additional "missing" that is not NA because models fail on NAs
     y <- factor(y, levels=c("Unknown", levels(y)))
@@ -99,6 +102,7 @@ processNAColumn <- function(input_dt, col) {
 #' @param avg_col: column to average
 #' @param output_col: column name to output the new feature
 #' @param fit_dt: data.table with columns in group_cols and avg_col
+#' @param n_threshold: calculate average only when group size exceed this 
 #' 
 #' @return list(col, fun) where fun is the transformation function
 #' @export
