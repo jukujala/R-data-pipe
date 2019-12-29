@@ -6,9 +6,9 @@ TODO:
   * test that uses the test data
   * make R package
 
-`r-functional-data-pipeline` is a simple machine learning pipeline for R.
+`simple.data.pipe` is a simple functional machine learning pipeline for R.
 It is both a paradigm and a library to help you.
-Use `r-functional-data-pipeline` to transform input data before calling 
+Use `simple.data.pipe` to transform input data before calling 
 R functions `train` and `predict`.
 
 ## Background
