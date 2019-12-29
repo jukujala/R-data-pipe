@@ -1,0 +1,14 @@
+Package: simple.data.pipe
+Title: R Machine Learning Data Pipeline
+Version: 0.0.0.9000
+Authors@R: person("Jussi", "Kujala", email = "jussi.kujala@iki.fi", role = c("aut", "cre"))
+Description: Machine learning data pipeline.
+Depends: 
+  R (>= 3.4.0),
+  data.table,
+  logging,
+  testthat
+License: Apache 2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
