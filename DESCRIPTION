@@ -1,4 +1,4 @@
-Package: simple.data.pipe
+Package: closure.data.pipe
 Title: R Machine Learning Data Pipeline
 Version: 0.0.0.9000
 Authors@R: person("Jussi", "Kujala", email = "jussi.kujala@iki.fi", role = c("aut", "cre"))

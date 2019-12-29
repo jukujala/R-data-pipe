@@ -1,9 +1,11 @@
-# Simple functional R data pipeline
+# Simple R data pipeline for machine learning, with closures
 
-`simple.data.pipe` is a simple functional machine learning data pipeline for R.
-It is both a paradigm how to structure your code and a package to support that.
-Use `simple.data.pipe` to transform input data before calling 
-R functions `train` and `predict`.
+`closure.data.pipe` is a simple machine learning data pipeline for R based on 
+functional programming.
+It is both a way to structure your code and a package with supporting 
+functions.
+Use `closure.data.pipe` to transform input data before calling 
+R functions `train` and `predict` both in development and production.
 
 ## Background
 
@@ -15,28 +17,28 @@ This repository uses package
 to represent and process data, but you can implement a similar approach in `dplyr`
 or with plain `data.frame`.
 
-## Steps to implement a pipeline
+## Steps to implement a data pipeline
 
 Write a function `createTransformFunction` that returns
 another function `transformData` which transforms input `data.table` to
 output `data.table`.
 The function `createTransformFunction` can depend on train data.
-R can persist the function `transformData` to a file.
+R can then persist the function `transformData` to a file for later use.
 
 ## A short example
 
-    #' create a function to transform input data for model
+    #' this function creates a function to transform input data for model
     #'
-    #' @param fit_dt: train data to fit transformation function
+    #' @param fit_dt: train data to fit data transformations
     #'
     #' @return transformation function
     createTransformFunction <- function(fit_dt) {
-      # fit some transformation
+      # fit any transformation function
       fitted_transformation <- createFittedTransformation(fit_dt)
       # prevent serialisation of fit_dt
       rm(fit_dt)
 
-      # define a function to transform input data
+      # define a function to transform the input data
       transformData <- function(input_dt) {
         # define the label
         input_dt[, label := as.character(y) ]
@@ -56,7 +58,7 @@ R can persist the function `transformData` to a file.
 
 ## Transformations supported by this R package
 
-This R package implements some transformations:
+This R package implements following predefined transformations:
 
   * `getCategTransform` processes a categorical input column:
 
@@ -87,7 +89,7 @@ This example shows how to use the predefined transformations
       # change data type
       fit_dt[, x := as.character(x) ]
 
-      # define transformations fitted with fit_dt as a list of functions
+      # define fitted transformations as a list of functions
       column_transforms <- list(
         # map values of x that occur more than 1000 times to separate values
         getCategTransform("x", fit_dt, threshold=1000),
@@ -130,8 +132,12 @@ This example shows how to use the predefined transformations
       return(transformData)
     }
 
-## Files
+## Install
 
-  * [transformation_functions.R](transformation_functions.R)
-    has transformation functions defined in this package.
+    # clone this repo
+    # start R shell at this root folder
+    source("install_package.R")
 
+## Build package
+
+    source("build_package.R")

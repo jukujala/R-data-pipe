@@ -1,4 +1,4 @@
 library(testthat)
-library(simple.data.pipe)
+library(closure.data.pipe)
 
-test_check("simple.data.pipe")
+test_check("closure.data.pipe")
