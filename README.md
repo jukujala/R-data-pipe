@@ -7,10 +7,9 @@ It is both
   1. A way to structure your code to correctly do data processing 
      for machine learning in both development and production.
   2. R package with few predefined data transformations.
-     and a supporting R package with
 
 Use `closure.data.pipe` to transform input data before calling 
-R functions `train` and `predict` both in development and production.
+R functions `train` and `predict`.
 
 ## Background
 
@@ -26,8 +25,9 @@ or with plain `data.frame`.
 
 Write a function `createTransformFunction` that returns
 another function `transformData` which transforms input data.
-The function `createTransformFunction` can fit `transformData` with train data.
-R can then persist the function `transformData` to a file for later use.
+The function `createTransformFunction` can fit `transformData` with train data
+and the magic of R closures makes this work.
+You can even persist `transformData` to a file for later use.
 
 ## A short example
 
