@@ -19,18 +19,15 @@ R functions `train` and `predict`.
 I got frustrated that R did not have good data pipelines similar to Python
 [sklearn.Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html),
 but luckily R function closures enable pipelines almost out of the box.
+[`caret`](https://topepo.github.io/caret/) 
+package supports
+[preprocessing functions](https://topepo.github.io/caret/pre-processing.html)
+which you can use together with `closure.data.pipe`.
+
 This repository uses package
 [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 to represent and process data, but you can implement a similar approach in `dplyr`
 or with plain `data.frame`.
-
-## Steps to implement a data pipeline
-
-Write a function `createTransformFunction` that returns
-another function `transformData` which transforms input data.
-The function `createTransformFunction` can fit `transformData` with train data
-and the magic of R closures makes this work.
-You can even persist `transformData` to a file for later use.
 
 ## A short example
 
