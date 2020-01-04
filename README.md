@@ -1,11 +1,14 @@
 # Simple R data pipeline for machine learning, with closures
 
-`closure.data.pipe` is a simple machine learning data pipeline for R based on 
+`closure.data.pipe` is a simple machine learning data pipeline based on
 functional programming.
-It is both 
+Data transformations are functions, and pipelines are functions that return
+data transformations.
 
-  1. A way to structure your code to correctly do data processing 
-     for machine learning in both development and production.
+This repo has:
+
+  1. Examples how to structure your code to do correctly data processing 
+     for machine learning.
   2. R package with few predefined data transformations.
 
 Use `closure.data.pipe` to transform input data before calling 
