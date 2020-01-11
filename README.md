@@ -19,19 +19,15 @@ R functions `train` and `predict`.
 I got frustrated that R did not have good data pipelines similar to Python
 [sklearn.Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html),
 but luckily R function closures enable pipelines almost out of the box.
-[`caret`](https://topepo.github.io/caret/) 
-package supports
-[preprocessing functions](https://topepo.github.io/caret/pre-processing.html)
-which you can use together with `closure.data.pipe`.
 
 This repository uses package
 [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 to represent and process data, but you can implement a similar approach in `dplyr`
 or with plain `data.frame`.
 
-## A short example
+## short R example
 
-    #' this function creates a function to transform input data for model
+    #' create a function that transforms input data for model
     #'
     #' @param fit_dt: train data to fit data transformations
     #'
@@ -39,10 +35,6 @@ or with plain `data.frame`.
     createTransformFunction <- function(fit_dt) {
       # fit any transformation function
       fitted_transformation <- createFittedTransformation(fit_dt)
-      # prevent serialisation of fit_dt
-      rm(fit_dt)
-
-      # define a function to transform the input data
       transformData <- function(input_dt) {
         # define the label
         input_dt[, label := as.character(y) ]
@@ -135,6 +127,12 @@ This example shows how to use the predefined transformations
       }
       return(transformData)
     }
+
+You can use any functions inside the transform function,
+for example
+[`caret`](https://topepo.github.io/caret/) 
+package
+[preprocessing functions](https://topepo.github.io/caret/pre-processing.html).
 
 ## Install
 
